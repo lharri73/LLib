@@ -17,7 +17,11 @@ int main(int argc, char** argv){
 
     tmp = stin.str();
     float ret = calc::solve(tmp.c_str(), 0, tmp.size());
-    printf("%f\n", ret);
+
+    if((int)ret == ret)
+        printf("%d\n", (int)ret);
+    else
+        printf("%f\n", ret);
 
     return 0;
 }
