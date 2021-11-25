@@ -13,5 +13,11 @@ add_executable(
         src/calc/main.cpp
     )
 
+add_executable(
+    sping
+
+        src/sping/main.cpp
+    )
+
 
 set(EXECUTABLE_OUTPUT_PATH "bin")
