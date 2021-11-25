@@ -15,9 +15,13 @@ add_executable(
 
 add_executable(
     sping
-
         src/sping/main.cpp
     )
 
+add_library(
+    MOA
+        src/MOA/MOA.c
+    )
 
 set(EXECUTABLE_OUTPUT_PATH "bin")
+set(LIBRARY_OUTPUT_PATH "lib")
