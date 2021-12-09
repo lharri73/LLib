@@ -14,6 +14,11 @@ add_executable(
     )
 
 add_executable(
+    mvdl
+        src/mvdl/main.cpp
+    )
+
+add_executable(
     sping
         src/sping/main.cpp
     )
