@@ -86,10 +86,24 @@ int main(int argc, char** argv){
 
     new_argv.push_back("mv");
     new_argv.push_back(tmp);
-    new_argv.push_back(".");
+
+    std::string dst;
+    if(argc == 1){
+        dst = ".";
+    }else if(argc == 2){
+        dst = argv[1];
+    }else{
+        fprintf(stderr, "usage: %s [destination]\n", argv[0]);
+        fprintf(stderr, "Moves the most recently downloaded file to the provided destination -or- current location.");
+        exit(2);
+    }
+
+    char* tmp2 = (char*)malloc(sizeof(char) * dst.size());
+    memcpy(tmp2, dst.c_str(), dst.size()+1);
+    new_argv.push_back(tmp2);
     new_argv.push_back(nullptr);
 
-    printf("mv %s .\n", tmp);
+    printf("mv %s %s\n", tmp, tmp2);
     execvp("mv", new_argv.data());
     perror("mv did not execute:");
 
