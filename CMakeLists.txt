@@ -9,7 +9,6 @@ add_executable(
 
 add_executable(
     calc
-        src/calc/solve.cpp
         src/calc/main.cpp
     )
 
@@ -28,5 +27,15 @@ add_library(
         src/MOA/MOA.c
     )
 
+find_package(CUDA)
+if(DEFINED CUDA_TOOLKIT_ROOT_DIR)
+    enable_language(CUDA)
+    add_library(
+        libCUDSafe
+            src/libCUDSafe/util.cpp
+    )
+endif()
+
 set(EXECUTABLE_OUTPUT_PATH "bin")
 set(LIBRARY_OUTPUT_PATH "lib")
+set(CMAKE_BUILD_TYPE Debug)
