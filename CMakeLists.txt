@@ -31,8 +31,13 @@ find_package(CUDA)
 if(DEFINED CUDA_TOOLKIT_ROOT_DIR)
     enable_language(CUDA)
     add_library(
-        libCUDSafe
+        CUDSafe
             src/libCUDSafe/util.cpp
+    )
+
+    target_include_directories(CUDSafe PUBLIC ${CUDA_INCLUDE_DIRS})
+    target_link_libraries(CUDSafe PUBLIC
+        ${CUDA_LIBRARIES}
     )
 endif()
 
