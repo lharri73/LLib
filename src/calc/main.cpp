@@ -13,18 +13,18 @@ class Val;
 class Val{
     public:
         Val(const std::string &input);
-        Val(float im);
+        Val(double im);
         ~Val();
 
         bool immediate;
-        float ival;
+        double ival;
         Val* left;
         Val* right;
         char op;
 
         std::string copy;
 
-        float evaluate();
+        double evaluate();
 };
 
 int main(int argc, char **argv){
@@ -44,7 +44,7 @@ int main(int argc, char **argv){
     }
     Val result(input_str);
 
-    float num_result = result.evaluate();
+    double num_result = result.evaluate();
     if(int(num_result) == num_result){
         printf("%d\n", (int)num_result);
     }else{
@@ -88,6 +88,25 @@ int find_close_paren(const std::string &input){
 
 }
 
+double get_inside_parens(std::string &input, size_t i){
+    char tmp[input.size() - i + 1];
+    std::strncpy(tmp, input.c_str() +i, input.size() - i+1);
+    std::string tmp_str(tmp);
+
+    int close_paren = find_close_paren(tmp_str);
+    if(close_paren < 0){
+        fprintf(stderr, "Unmatched '%c'\n", -close_paren);
+        exit(1);
+    }
+    
+    memset(tmp, '\0', input.size() - i + 1);
+    strncpy(tmp, input.c_str()+1, close_paren-1);
+    tmp_str = tmp;
+    Val left(tmp_str);
+
+    return left.evaluate();
+}
+
 Val::Val(const std::string &input_orig){
     copy = input_orig.c_str();
     std::string input = input_orig;
@@ -129,40 +148,44 @@ Val::Val(const std::string &input_orig){
             immediate = false;
             continue;
         }
+        if(input[i] == ']' || input[i] == ')'){
+            fprintf(stderr, "Unmatched '%c'\n", input[i]);
+            exit(1);
+        }
         if(op != 0 && op != -1){
             char tmp[input.size() - i + 1];
             memcpy(tmp, input.c_str() + i, input.size() -i+1);
             std::string tmp_str(tmp);
             right = new Val(tmp_str);
-            float tmp_ival;
+            double tmp_ival;
             strBuf >> tmp_ival;
             left = new Val(tmp_ival);
             break;
         }
         if(input[i] == '(' || input[i] == '['){
-            char tmp[input.size() - i + 1];
-            std::strncpy(tmp, input.c_str() +i, input.size() - i+1);
-            std::string tmp_str(tmp);
+            double cur_ival = get_inside_parens(input, i);
 
-            if(left != nullptr){
-                right = new Val(tmp_str);
-                break;
+            size_t j;
+            for(j=close_paren; j < tmp_str.size(); j++){
+                if(tmp_str[j] != ' ') break;
+            }
+            if(is_operator(tmp_str[j]))
+                op = tmp_str[j++];
+            else if(tmp_str[j] == '[' || tmp_str[j] == '('){
+                double next_ival = get_inside_parens(input, i);
+
+                std::stringstream vals;
+                vals.str();
+                vals << cur_ival << '*' << next_ival;
+                left = new Val(vals.str());
+
             }
 
-            int close_paren = find_close_paren(tmp_str);
-            if(close_paren < 0){
-                fprintf(stderr, "Unmatched '%c'\n", -close_paren);
-                exit(1);
-            }
-            
             memset(tmp, '\0', input.size() - i + 1);
-            strncpy(tmp, input.c_str()+1, close_paren-1);
+            strncpy(tmp, tmp_str.c_str()+j, tmp_str.size() - j+1);
             tmp_str = tmp;
-            left = new Val(tmp_str);
-
-            i += close_paren+1; // skip over close paren
-
-            op = -1;
+            right = new Val(tmp_str);
+            break;
         }
         if(op != 0 && left != nullptr){
             char tmp[input.size() - i + 1];
@@ -190,18 +213,21 @@ Val::~Val(){
         delete right;
 }
 
-Val::Val(float im){
+Val::Val(double im){
     copy = "immediate";
     immediate = true;
     ival = im;
 }
 
-float Val::evaluate(){
-    float retVal;
+double Val::evaluate(){
+    double retVal;
     if(immediate){
         retVal = ival;
     }else{
         switch(op){
+            case -1:
+                retVal = left != nullptr ? left->evaluate() : right->evaluate();
+                break;
             case '+':
                 retVal = left->evaluate() + right->evaluate();
                 break;
@@ -209,7 +235,7 @@ float Val::evaluate(){
                 retVal = left->evaluate() - right->evaluate();
                 break;
             case '*': 
-            case -1:
+            //case -1:
                 retVal = left->evaluate() * right->evaluate();
                 break;
             case '/': 
