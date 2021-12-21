@@ -127,8 +127,8 @@ Val::Val(const std::string &input){
         if(input[i] == '(' || input[i] == '['){
             double next = get_inside_parens(input, i);
             values.push_back(next);
-            std::string tmp = input.c_str() + i;
-            i += find_close_paren(input.c_str()+i)+1;
+            //std::string tmp = input.c_str() + i;
+            i += find_close_paren(input.c_str()+i);
             if(num_read != 0){
                 values.push_back(parse_val(buf));
                 num_read = 0;
