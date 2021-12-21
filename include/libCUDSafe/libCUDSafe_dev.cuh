@@ -5,13 +5,14 @@
 // Defines a set of gaurds to prevent overflows our out of 
 // bounds errors. Useful for debugging 
 #define CUDA_ASSERT_NEG(var, error) error_check(var < 0.0f, __FILE__, __LINE__, error, var);
+#define CUDA_ASSERT_NEG_E(var, error) error_check(var <= 0.0f, __FILE__, __LINE__, error, var);
 #define CUDA_ASSERT_POS(var, error) error_check(var > 0.0f, __FILE__, __LINE__, error, var);
 #define CUDA_ASSERT_POS_E(var, error) error_check(var >= 0.0f, __FILE__, __LINE__, error, var);
-#define CUDA_ASSERT_GT(var1, var2, error) error_check(var1 >= var2, __FILE__, __LINE__, error, var1, var2);
+#define CUDA_ASSERT_GT(var1, var2, error) error_check(var1 > var2, __FILE__, __LINE__, error, var1, var2);
+#define CUDA_ASSERT_GT_E(var1, var2, error) error_check(var1 >= var2, __FILE__, __LINE__, error, var1, var2);
+#define CUDA_ASSERT_LT(var1, var2, error) error_check(var1 < var2, __FILE__, __LINE__, error, var1, var2);
 #define CUDA_ASSERT_LT_E(var1, var2, error) error_check(var1 <= var2, __FILE__, __LINE__, error, var1, var2);
 #define CUDA_ASSERT_GT_LINE(var1, var2, error, line,file) error_check(var1 >= var2, file, line, error, var1, var2, true);
-
-#define array_index(row,col,info) array_index_macro(row,col,info,__LINE__,__FILE__)
 
 __device__ 
 __forceinline__
