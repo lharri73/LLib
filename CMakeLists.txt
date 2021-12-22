@@ -18,6 +18,11 @@ add_executable(
     )
 
 add_executable(
+    rmdl
+        src/rmdl/main.cpp
+    )
+
+add_executable(
     sping
         src/sping/main.cpp
     )
