@@ -32,6 +32,22 @@ add_library(
         src/MOA/MOA.c
     )
 
+add_library(
+    dlLib
+        src/dlLib/dlLib.cpp
+    )
+
+######################
+target_link_libraries(
+    mvdl
+        dlLib
+    )
+
+target_link_libraries(
+    rmdl
+        dlLib
+    )
+
 find_package(CUDA)
 if(DEFINED CUDA_TOOLKIT_ROOT_DIR)
     enable_language(CUDA)

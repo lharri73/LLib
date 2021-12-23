@@ -49,5 +49,3 @@ This requires cmake...and that's it.
     - random word generator
     - random number generator (program)
     - python array to matlab (and back)
-    - remove recent download (rmdl)
-    - https://github.com/cgag/loc
