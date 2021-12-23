@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 2.8.11)
+cmake_minimum_required (VERSION 2.9.0)
 project(LandonLib)
 
 include_directories(include)
@@ -25,6 +25,16 @@ add_executable(
 add_executable(
     sping
         src/sping/main.cpp
+    )
+
+add_executable(
+    con
+        src/con/main.cpp
+    )
+
+file(MAKE_DIRECTORY ~/.local/config/con/)
+install(FILES ./src/con/units.txt
+    DESTINATION ~/.local/config/con/units.txt
     )
 
 add_library(
