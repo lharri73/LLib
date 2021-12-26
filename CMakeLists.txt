@@ -34,7 +34,7 @@ add_executable(
     )
 
 install(FILES ./src/con/units.txt
-    DESTINATION ~/.local/config/con/
+    DESTINATION ~/.config/con/
     )
 
 add_library(

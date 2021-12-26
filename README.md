@@ -20,6 +20,12 @@ This requires cmake...and that's it.
 
 - `calc`
     - a command line calculator. Honors order of operations and parenthetical expressions. 
+- `con`
+    - a command line conversion utility. Converts the input unit to the specified output 
+      unit. Units can be customized in `units.txt`. This works by building a graph of 
+      valid conversion, then performing dijkstras to find the path that requires the least
+      number of conversions to reach the desired unit. The conversion path is printed as well
+      as the converted value. 
 - `mvdl`
     - Moves the most recently modified file in your downloads folder to the currnet
       location of the shell. Takes no arguments. That is all. 
