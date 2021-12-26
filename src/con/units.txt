@@ -61,8 +61,36 @@ grad 0.01571 rad
 
 # pressure
 bar 1e5 Pa
+psi 6894.76 Pa
+atm 101325 Pa
+torr 133 Pa
 
+# Speed
+mph 1.60934 kph
+m/s 3.6 kph
+m/s 3.281 ft/s
+m/s 1.944 knot
 
+# time
+min 60 sec
+hr 60 min
+day 24 hr
+week 7 day
+month 4 week
+year 12 month
+decade 10 year
+century 100 year
+
+# volume
+gal 4 quart
+quart 2 pint
+pint 2 cup
+cup 8 floz
+cup 8 tbsp
+tbsp 3 tsp
+m^3 33814 floz
+m^3 1000 L
+L 1000 mL
 
 # temperature
 C 1.8 + 32 F
