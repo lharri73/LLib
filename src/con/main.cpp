@@ -3,31 +3,8 @@
 #include <iostream>
 #include <map>
 #include <vector>
+#include "con/Graph.hpp"
 
-struct Unit{
-    std::string name;
-    std::vector<std::pair<Unit*,double> > edges;
-    bool visited;
-};
-
-class Graph{
-    public:
-        Graph();
-        ~Graph();
-
-        void dijkstras(std::pair<int,int> start, std::pair<int,int> end);
-
-    private:
-        std::vector<Unit*> map;
-        std::map<std::string,Unit*> units;
-};
-
-double convert(std::string in_unit, std::string to_unit, double input){
-    // find index of to and from unit
-    // find path between them
-    return 0;
-
-}
 
 int main(int argc, char** argv){
     std::string input_str;
@@ -46,10 +23,28 @@ int main(int argc, char** argv){
     double from_num;
     std::string from_unit;
     std::string to_unit;
-    stream_in >> from_num;
-    stream_in >> from_unit;
-    stream_in >> to_unit;
+    if(!(stream_in >> from_num)){
+        fprintf(stderr, "cannot determine input number from '%s'\n", stream_in.str().c_str());
+        exit(1);
+    }
+    if(!(stream_in >> from_unit)){
+        fprintf(stderr, "cannot determine input unit from '%s'\n", stream_in.str().c_str());
+        exit(1);
+    }
+    if(!(stream_in >> to_unit)){
+        fprintf(stderr, "cannot determine output unit from '%s'\n", stream_in.str().c_str());
+        exit(1);
+    }
 
-    printf("converting from %f (%s) to (%s)\n", from_num, from_unit.c_str(), to_unit.c_str());
+
+    Graph g;
+    bool found_path= g.dijkstras(from_unit, to_unit);
+    if(found_path){
+        double conversion;
+        conversion = g.get_value(from_num);
+        std::cout << conversion << to_unit << '\n';
+    }else{
+        printf("cannot convert\n");
+    }
     return 0;
 }

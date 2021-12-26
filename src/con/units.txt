@@ -1,4 +1,69 @@
-m -
-km -
-cm 100 m
-m 1000 km
+## Larger value goes on the left
+
+# distance
+m 100 cm
+km 1000 m
+m 3.2804 ft
+m 1000 mm
+mi 5280 ft 
+yd 3 ft
+ft 12 in
+fathom 2 yd
+smoot 1.7018 m
+LYr 9.461e15 m
+
+# area
+km^2 1e6 m^2
+mi^2 2.59e+6 m^2
+m^2 1.196 yd^2
+ft^2 144 in^2
+ft^2 10.764 m^2
+hectare 10000 m^2
+acre 4840 yd^2
+
+# digital storage
+Mb 1024 kb
+Gb 1024 Mb
+Tb 1024 Gb
+Pb 1024 Tb
+Yb 1024 Pb
+
+# Energy
+kJ 1000 J
+GC 4.184 J 
+GC 1 Gram_Calorie
+kC 4184 J
+Whr 3600 J
+kWhr 3.6e6 J
+J 6.242e+18 ev
+BTU 1055.06 J
+therm 1.055e+8 J
+
+# frequency
+kHz 1000 Hz
+mHz 1e6 Hz
+GHz 189 Hz
+
+# Fuel Economy
+km/L 2.352 mpg
+
+# mass
+mton 1000 kg
+kg 1000 g
+g 1000 mg
+ton 2000 lbs
+lbs 16 oz
+kg 2.205 lbs
+
+# angles
+deg 0.01745 rad
+grad 0.01571 rad
+
+# pressure
+bar 1e5 Pa
+
+
+
+# temperature
+C 1.8 + 32 F
+K 1 - 273.15 C

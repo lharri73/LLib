@@ -30,11 +30,11 @@ add_executable(
 add_executable(
     con
         src/con/main.cpp
+        src/con/Graph.cpp
     )
 
-file(MAKE_DIRECTORY ~/.local/config/con/)
 install(FILES ./src/con/units.txt
-    DESTINATION ~/.local/config/con/units.txt
+    DESTINATION ~/.local/config/con/
     )
 
 add_library(
@@ -75,4 +75,4 @@ endif()
 set(EXECUTABLE_OUTPUT_PATH "bin")
 set(LIBRARY_OUTPUT_PATH "lib")
 set(CMAKE_BUILD_TYPE Debug)
-add_compile_options(-Wall -Wextra -pedantic -Werror)
+add_compile_options(-Wall -Wextra -pedantic -Werror -glldb)
