@@ -1,4 +1,5 @@
 #include "dlLib/dlLib.hpp"
+#include <string.h>
 
 namespace LLib{
     access_pair is_dir(std::string downloads, const char* filename){
