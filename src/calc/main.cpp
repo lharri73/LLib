@@ -55,6 +55,7 @@ bool is_operator(char test){
         case '-':
         case '/':
         case '*':
+        case 'x':
         case '^':
             return true;
             break;
@@ -163,7 +164,7 @@ double Val::evaluate(){
         }
     }
     for(size_t i = 0; i < operators.size(); i++){
-        if(operators[i] == '*'){
+        if(operators[i] == '*' || operators[i] == 'x'){
             values[i] = values[i] * values[i+1];
             values.erase(values.begin()+i+1);
             operators.erase(operators.begin()+i);
