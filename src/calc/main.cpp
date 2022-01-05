@@ -40,11 +40,7 @@ int main(int argc, char **argv){
     Val result(input_str);
 
     double num_result = result.evaluate();
-    if(int(num_result) == num_result){
-        printf("%d\n", (int)num_result);
-    }else{
-        printf("%f\n", result.evaluate());
-    }
+    std::cout << num_result << std::endl;
 
     return 0;
 }
