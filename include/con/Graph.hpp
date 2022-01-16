@@ -34,13 +34,15 @@ class Graph{
         Graph();
         ~Graph();
 
-        bool dijkstras(std::string from, std::string to);
+        int dijkstras(std::string from, std::string to);
         double get_value(double input);
+        std::vector<Unit> list_all(std::string from);
 
     private:
         std::vector<Unit*> units;
         std::map<std::string,Unit*> unit_map;
 
         std::map<std::string,Unit*>::const_iterator end_unit;
+        void reset_visited();
 };
 

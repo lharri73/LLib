@@ -38,13 +38,21 @@ int main(int argc, char** argv){
 
 
     Graph g;
-    bool found_path= g.dijkstras(from_unit, to_unit);
-    if(found_path){
+    int found_path= g.dijkstras(from_unit, to_unit);
+    if(found_path == 1){
         double conversion;
         conversion = g.get_value(from_num);
         std::cout << conversion << to_unit << '\n';
+    }else if(found_path == 2){
+        exit(1);
     }else{
-        printf("cannot convert\n");
+        // input unit is good, output is garbage
+        std::vector<Unit> units = g.list_all(from_unit);
+        printf("valid units to convert from %s with:\n", from_unit.c_str());
+        for(size_t i = 0; i < units.size(); i++){
+            printf("- %s\n", units.at(i).name.c_str());
+        }
+        exit(1);
     }
     return 0;
 }

@@ -130,19 +130,19 @@ typename std::multimap<T,V*>::iterator find_in_mm(std::multimap<T,V*> &map, cons
     return it;
 }
 
-bool Graph::dijkstras(std::string from_str, std::string to_str){
+int Graph::dijkstras(std::string from_str, std::string to_str){
     std::map<std::string,Unit*>::const_iterator from;
     std::map<std::string,Unit*>::const_iterator to;
 
     from = unit_map.find(from_str);
     if(from == unit_map.end()){
         fprintf(stderr, "'%s' is not a valid unit in units.txt. Don't know how to convert.\n", from_str.c_str());
-        exit(1);
+        return 2;
     }
     to = unit_map.find(to_str);
     if(to == unit_map.end()){
         fprintf(stderr, "'%s' is not a valid unit in units.txt. Don't know how to convert.\n", to_str.c_str());
-        exit(1);
+        return 3;
     }
 
     std::multimap<int,Unit*> front;
@@ -179,7 +179,7 @@ bool Graph::dijkstras(std::string from_str, std::string to_str){
     }
 
     end_unit = to;
-    return to->second->backedge.valid;
+    return to->second->backedge.valid ? 1 : 0;
 }
 
 double Graph::get_value(double input){
@@ -244,6 +244,31 @@ double Graph::get_value(double input){
     putchar('\n');
     return input;
 
+}
+
+void Graph::reset_visited(){
+    for(size_t i = 0; i < units.size(); i++){
+        units.at(i)->visited = false;
+    }
+}
+
+void visit_nodes(std::vector<Unit> &units, Unit *cur){
+    units.push_back(*cur);
+    cur->visited = true;
+    for(size_t i = 0; i < cur->edges.size(); i++){
+        if(cur->edges.at(i).to->visited) continue;
+        visit_nodes(units, cur->edges.at(i).to);
+    }
+}
+
+std::vector<Unit> Graph::list_all(std::string from_unit){
+    reset_visited();
+    std::vector<Unit> ret;
+    std::map<std::string,Unit*>::iterator it;
+    it = unit_map.find(from_unit);
+    Unit *cur = (it->second);
+    visit_nodes(ret, cur);
+    return ret;
 }
 
 Unit::Unit(){
