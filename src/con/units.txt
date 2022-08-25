@@ -22,6 +22,7 @@ hectare 10000 m^2
 acre 4840 yd^2
 
 # digital storage
+kb 1024 b
 Mb 1024 kb
 Gb 1024 Mb
 Tb 1024 Gb
