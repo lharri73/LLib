@@ -71,6 +71,7 @@ mph 1.60934 kph
 m/s 3.6 kph
 m/s 3.281 ft/s
 m/s 1.944 knot
+rpm 9.54929 rad/s
 
 # time
 min 60 sec
@@ -92,6 +93,7 @@ tbsp 3 tsp
 m^3 33814 floz
 m^3 1000 L
 L 1000 mL
+ml 1 mL
 
 # temperature
 C 1.8 + 32 F
