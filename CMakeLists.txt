@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 2.9.0)
+cmake_minimum_required (VERSION 3.0.0)
 project(LandonLib)
 
 include_directories(include)
@@ -32,6 +32,10 @@ add_executable(
         src/con/main.cpp
         src/con/Graph.cpp
     )
+add_executable(
+    clip
+        src/clip/main.cpp
+    )
 
 install(FILES ./src/con/units.txt
     DESTINATION ~/.config/con/
@@ -58,6 +62,11 @@ target_link_libraries(
         dlLib
     )
 
+target_link_libraries(
+    clip
+        dlLib
+    )
+
 find_package(CUDA)
 if(DEFINED CUDA_TOOLKIT_ROOT_DIR)
     enable_language(CUDA)
@@ -72,7 +81,16 @@ if(DEFINED CUDA_TOOLKIT_ROOT_DIR)
     )
 endif()
 
+if(UNIX AND NOT APPLE)
+    add_compile_definitions(LINUX=1)
+elseif(APPLE)
+    add_compile_definitions(APPLE=1)
+else()
+    message(FATAL_ERROR "Only supported on Apple and Linux")
+endif()
+
 set(EXECUTABLE_OUTPUT_PATH "bin")
 set(LIBRARY_OUTPUT_PATH "lib")
 set(CMAKE_BUILD_TYPE Debug)
 add_compile_options(-Wall -Wextra -pedantic -Werror -glldb)
+set(CMAKE_CXX_STANDARD 11)
