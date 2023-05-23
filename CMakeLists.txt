@@ -94,3 +94,6 @@ set(LIBRARY_OUTPUT_PATH "lib")
 set(CMAKE_BUILD_TYPE Debug)
 add_compile_options(-Wall -Wextra -pedantic -Werror -glldb)
 set(CMAKE_CXX_STANDARD 11)
+
+install(TARGETS mvdl calc rmdl con sping)
+
